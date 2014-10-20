@@ -14,7 +14,7 @@ task :push do
   cd 'build' do
     system 'git add .'
     system 'git add -u'
-    system 'git commit -m "Site updated at #{Time.now.utc}"'
+    system "git commit -m 'Site updated at #{Time.now.utc}'"
     system 'git push origin master:gh-pages --force'
   end
 end
