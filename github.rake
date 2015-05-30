@@ -1,12 +1,24 @@
+# ====================================
+#   Deploy: GitHub Pages
+# ====================================
+
+# ----- Variables ----- #
+
+REPO_URL = ''
+
+# ----- Generate ----- #
+
 desc 'Generate flat files with Middleman'
 task :generate do
   puts '-- Generating site with Middleman --'
   system './bin/middleman build --clean'
   cd 'build' do
     system 'git init'
-    system 'git remote add origin REPO_URL'
+    system "git remote add origin #{ REPO_URL }"
   end
 end
+
+# ----- Push ----- #
 
 desc 'Push the build to the gh-pages branch on GitHub'
 task :push do
@@ -18,6 +30,8 @@ task :push do
     system 'git push origin master:gh-pages --force'
   end
 end
+
+# ----- Deploy ----- #
 
 desc 'Generate flat files and deploy to GitHub Pages'
 task :deploy => [:generate, :push] do
